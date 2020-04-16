@@ -1,0 +1,34 @@
+{
+    "name": "osi/auth-api",
+    "description": "A Laravel Vue Admin Extend",
+    "keywords": [
+        "laravel",
+        "vue",
+        "admin"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "laravel/sanctum": "^2.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Osi\\AuthApi\\": "src/"
+        },
+        "files": [
+            "src/helpers.php"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Osi\\AuthApi\\ExtendServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
