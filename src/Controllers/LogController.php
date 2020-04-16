@@ -4,7 +4,6 @@ namespace Osi\AuthApi\Controllers;
 
 use Osi\AuthApi\Models\ApiLog;
 use SmallRuralDog\Admin\Components\Avatar;
-use SmallRuralDog\Admin\Components\SelectOption;
 use SmallRuralDog\Admin\Components\Tag;
 use SmallRuralDog\Admin\Controllers\AdminController;
 use SmallRuralDog\Admin\Form;
@@ -51,13 +50,4 @@ class LogController extends AdminController
 
         return $form;
     }
-}
-function getDevicesOptions($htmlOptions = true)
-{
-    return collect(config('auth.guards'))->filter(function ($item, $key) {
-        return $item['driver'] === 'sanctum' && $key !== 'sanctum';
-    })->map(function ($item) use ($htmlOptions) {
-        $label = $item['name'] ?? $item['provider'];
-        return $htmlOptions ? SelectOption::make($item['provider'], $label) : ['value' => $item['provider'], 'label' => $label];
-    })->toArray();
 }

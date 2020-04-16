@@ -4,10 +4,12 @@ namespace Osi\AuthApi;
 
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
+use Osi\AuthApi\Console\MenuCommand;
 use SmallRuralDog\Admin\Admin;
 
 class ExtendServiceProvider extends ServiceProvider
 {
+
     protected $routeMiddleware = [
         'authapi.log' => Middleware\LogOperation::class,
         'authapi.permission' => Middleware\Permission::class,
@@ -51,6 +53,9 @@ class ExtendServiceProvider extends ServiceProvider
         $this->loadAdminAuthConfig();
         $this->registerRouteMiddleware();
         $this->registerRouter(); //
+        $this->commands([
+            MenuCommand::class,
+        ]);
     }
     /**
      * 注册路由

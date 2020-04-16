@@ -13,7 +13,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Osi\\AuthApi\\": "src/"
+            "Osi\\AuthApi\\": "src/",
+            "Osi\\AuthApi\\Database\\": "database/"
         },
         "files": [
             "src/helpers.php"
