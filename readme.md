@@ -1,12 +1,16 @@
 ## 第三方应用API接口扩展
 
-### 依赖
+### 安装
+```bash
+composer require osi/auth-api
 ```
-laravel/sanctum
+### 依赖
+```bash
+composer require laravel/sanctum
 ```
 
-### 开始
-```
+### 最佳实践
+```bash
 #依赖组件
 composer require laravel/sanctum
 php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
@@ -14,7 +18,7 @@ php artisan vendor:publish --provider="Laravel\Sanctum\SanctumServiceProvider"
 composer require osi/auth-api
 php artisan vendor:publish --provider="Osi\AuthApi\ExtendServiceProvider"
 
-php artisan migrate
+php artisan authapi:menu
 ```
 ### 配置
 - 如果基于 `smallruraldog/laravel-vue-admin` 则修改 `config/auth.php` providers:
@@ -27,7 +31,7 @@ php artisan migrate
         ],
 
         // ** New provider**
-        'admins' => [
+        'admin-api' => [
             'driver' => 'eloquent',
             'model' => Osi\AuthApi\Models\Admin::class,
         ],
@@ -48,9 +52,10 @@ php artisan migrate
             'hash' => false,
         ],
 	    // ** New guard **
-        'admin' => [
+        'admin-api' => [
             'driver' => 'sanctum',
-            'provider' => 'admins',
+            'provider' => 'admin-api',
+            'name' => 'Admin`s Api',
         ],
     ],
 ```
@@ -58,11 +63,13 @@ php artisan migrate
 配置model
 ```php
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Laravel\Sanctum\HasApiTokens;
-class Admin extends Authenticatable
+use Osi\AuthApi\Models\AuthInterface;
+class Admin extends Authenticatable implements AuthInterface
 {
     use HasApiTokens;
-    public function resource()
+    public function resourceFormat()
     {
     	return $this;
     	// OR Create New Resource
@@ -71,6 +78,14 @@ class Admin extends Authenticatable
     public function findForPassport($username)
     {
         return $this->where('username', $username)->first();
+    }
+    public function apiLogs(): MorphMany
+    {
+       // return $this->morphMany(ApiLog::class, 'model');
+    }
+    public function apiPermissions(): MorphMany
+    {
+       // return $this->morphMany(ApiPermission::class, 'model');
     }
 }
 ```
@@ -81,7 +96,7 @@ POST /api/sanctum/token HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 
-{"username":"admin","password":"admin","provider":"admins"}
+{"username":"admin","password":"admin","provider":"admin-api"}
 
 // 返回 Bearer 的后面部分
 {
@@ -96,7 +111,7 @@ Content-Type: application/json
 Accept: application/json
 
 // 返回用户信息 定义model文件中 resource 函数可修改
-public function resource() 
+public function resourceFormat() 
 ```
 
 
