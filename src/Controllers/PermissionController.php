@@ -58,9 +58,10 @@ class PermissionController extends AdminController
                     ->clearable()
                     ->options(getDevicesOptions());
             });
-        $form->item('model_id', '所属用户')->required()->vif('device', false, true)->component(function () use ($edit) {
+        $form->item('model_id', '所属用户')->required()->vif('device', false, true)->component(function () use ($edit, $form) {
             return Select::make()
                 ->filterable()
+                ->label($form, ['key' => 'model', 'value' => ['value' => 'id', 'label' => ['name', 'username']]])
                 ->extUrlParams(['format' => 'options'])
                 ->depend(['device'])
                 ->paginate(10)

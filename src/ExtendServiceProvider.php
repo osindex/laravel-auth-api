@@ -5,7 +5,6 @@ namespace Osi\AuthApi;
 use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider;
 use Osi\AuthApi\Console\MenuCommand;
-use SmallRuralDog\Admin\Admin;
 
 class ExtendServiceProvider extends ServiceProvider
 {
@@ -36,8 +35,9 @@ class ExtendServiceProvider extends ServiceProvider
     public function boot()
     {
 
-        Admin::script('auth-api', __DIR__ . '/../dist/js/extend.js');
-        Admin::style('auth-api', __DIR__ . '/../dist/css/extend.css');
+        // Admin::script('auth-api', __DIR__ . '/../dist/js/extend.js');
+        // Admin::style('auth-api', __DIR__ . '/../dist/css/extend.css');
+        // 暂时没有前端资源
         $this->registerPublishing();
 
     }
