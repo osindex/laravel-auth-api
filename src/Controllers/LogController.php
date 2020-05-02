@@ -3,8 +3,8 @@
 namespace Osi\AuthApi\Controllers;
 
 use Osi\AuthApi\Models\ApiLog;
-use SmallRuralDog\Admin\Components\Avatar;
-use SmallRuralDog\Admin\Components\Tag;
+use SmallRuralDog\Admin\Components\Grid\Avatar;
+use SmallRuralDog\Admin\Components\Grid\Tag;
 use SmallRuralDog\Admin\Controllers\AdminController;
 use SmallRuralDog\Admin\Form;
 use SmallRuralDog\Admin\Grid;

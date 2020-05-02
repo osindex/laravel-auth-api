@@ -3,9 +3,9 @@
 namespace Osi\AuthApi\Controllers;
 
 use Osi\AuthApi\Models\ApiPermission;
-use SmallRuralDog\Admin\Components\Avatar;
-use SmallRuralDog\Admin\Components\Select;
-use SmallRuralDog\Admin\Components\Tag;
+use SmallRuralDog\Admin\Components\Form\Select;
+use SmallRuralDog\Admin\Components\Grid\Avatar;
+use SmallRuralDog\Admin\Components\Grid\Tag;
 use SmallRuralDog\Admin\Controllers\AdminController;
 use SmallRuralDog\Admin\Form;
 use SmallRuralDog\Admin\Grid;
